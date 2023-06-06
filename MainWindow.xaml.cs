@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -28,19 +31,33 @@ namespace Prog_124_S23_L16_Persistent_Data_JSON
             InitializeComponent();
             lbMembers.ItemsSource = _members;
 
-            Preload();
+            //Preload();
 
         } // MainWindow
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            JsonSerializerOptions jso = new JsonSerializerOptions()
+            {
+                WriteIndented = true
+            };
 
+            string jsonManager = JsonSerializer.Serialize(_members, jso);
+
+            File.WriteAllText(Data.MemberFilePath, jsonManager);
         } // btnSave_Click
 
         private void btnLoad_Click(object sender, RoutedEventArgs e)
         {
+            string listFromFile = File.ReadAllText(Data.MemberFilePath);
+            _members = JsonSerializer.Deserialize<List<Member>>(listFromFile);
 
+            MembersListRefresh();
         } // btnLoad_Click
+
+
+
+
 
         public void Preload()
         {
@@ -87,8 +104,6 @@ namespace Prog_124_S23_L16_Persistent_Data_JSON
                 TransactionListRefresh();
             }
 
-     
-
         } // btnAddItem_Click
 
         private void lbMembers_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -104,16 +119,17 @@ namespace Prog_124_S23_L16_Persistent_Data_JSON
             }
         } // lbMembers_SelectionChanged
 
+        // Helper Methods
         public void TransactionListRefresh()
         {
             lvTransactions.Items.Refresh();
-
+            
         } // LvTransactionRefresh
 
         public void MembersListRefresh()
         {
+            lbMembers.ItemsSource = _members;
             lbMembers.Items.Refresh();
-
         } // LvTransactionRefresh
 
 

@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace Prog_124_S23_L16_Persistent_Data_JSON
 {
-    internal class Member
+    public class Member
     {
         string _name;
         string _number;
         List<Transaction> _transactions;
+
+        //public Member() { }
 
         public Member(string name)
         {
@@ -23,7 +25,7 @@ namespace Prog_124_S23_L16_Persistent_Data_JSON
 
         public string Name { get => _name; set => _name = value; }
         public string Number { get => _number; set => _number = value; }
-        public List<Transaction> Transactions { get => _transactions; }
+        public List<Transaction> Transactions { get => _transactions; set => _transactions = value; }
 
         public void AddTransaction(Transaction transaction)
         {

@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace Prog_124_S23_L16_Persistent_Data_JSON
 {
-    internal class Transaction
+    public class Transaction
     {
         string _name;
         double _price;
         int _quantity;
+
+        public Transaction() { }
 
         public Transaction(string name, double price, int quantity)
         {
