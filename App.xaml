@@ -1,0 +1,9 @@
+﻿<Application x:Class="Prog_124_S23_L16_Persistent_Data_JSON.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Prog_124_S23_L16_Persistent_Data_JSON"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
